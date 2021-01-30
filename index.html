@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book-Shop</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./src/css/main.css">
+    <link rel="stylesheet" href="./src/css/modal.css">
+    <link rel="stylesheet" href="./src/css/input.css">
+</head>
+
+<body onload="init()">
+
+    <div class="container">
+        <button class="btn-add" onclick="onAddBook()">Add New Book</button>
+        <span class="table-wrapper"></span>
+
+
+        <div class="pagination">
+            <button onclick="onSetPageSizeClick(1)">1</button>
+            <button onclick="onSetPageSizeClick(3)">3</button>
+            <button onclick="onSetPageSizeClick(5)">5</button>
+        </div>
+
+        <div class="pagination page-nav">
+            <button>&laquo;</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>&raquo;</button>
+        </div>
+
+    </div>
+
+    <!-- modal -->
+    <!-- The Form Modal -->
+    <div class="modal">
+        <div class="modal-content">
+            <button class="modal-input" style="width:5%;background-color: rgb(158, 158, 65);"
+                onclick="renderModal(false)">X</button>
+            <h3>
+                <span class="action-name">Add/Update</span>&nbsp;Book
+            </h3>
+
+            <span class="content-wrapper"></span>
+
+        </div>
+    </div>
+
+    <!-- The Read Modal -->
+    <div class="modal-book-details">
+        <div class="modal-content">
+            <div class="book-details-wrapper">
+                <img class="book-image" src="./src/images/noname.jpg" alt="noname.jpg" />
+
+                <div class="book-name-price">
+                    <h3 class="book-name">Sample Book Name</h3>
+                    <div>Only:<span class="book-price"></span>$</div>
+                </div>
+            </div>
+            <button class="close-modal" style="background-color: rgb(37, 177, 79);"
+                onclick="renderReadModal(false)">close</button>
+        </div>
+    </div>
+
+
+
+    <script src="./src/js/util.js"></script>
+    <script src="./src/js/storage-service.js"></script>
+    <script src="./src/js/book-service.js"></script>
+    <script src="./src/js/form.js"></script>
+    <script src="./src/js/book-controller.js"></script>
+</body>
+
+</html>

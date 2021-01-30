@@ -1,0 +1,181 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+body {
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    min-width: 50vw;
+    min-height: 50vh;
+    max-height: 80vh;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    background-color: white;
+    padding: 2vw;
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none;
+    padding: 5px;
+}
+
+a:hover {
+    color: red;
+}
+
+button {
+    /* Green */
+    border: none;
+    color: white;
+    padding: 6px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.btn-add {
+    width: 15%;
+    margin-bottom: 10px;
+    background-color: rgb(100, 216, 100);
+}
+
+button:hover {
+    filter: brightness(70%)
+}
+
+/***/
+
+table {
+    display: block;
+    empty-cells: show;
+    background-color: #fefefe;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+thead {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+tbody {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+tr {
+    width: 100%;
+    display: flex;
+}
+
+tr:hover:not(thead tr) {
+    opacity: 0.5;
+}
+
+th,
+td {
+    padding: 8px;
+    font-weight: bold;
+    flex-basis: 100%;
+    flex-grow: 1;
+    display: block;
+    padding: 1rem;
+}
+
+th {
+    text-align: left;
+}
+
+th:last-child {
+    display: flex;
+    /* align-content: flex-start; */
+    flex-basis: 350%;
+}
+
+td img {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+tr:nth-child(even),
+thead tr {
+    background-color: rgb(228, 218, 218);
+}
+
+tbody {
+    max-height: 50vh;
+}
+
+.rate-book {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: space-between;
+    /* flex-basis: 150%; */
+}
+
+.rate-book button {
+    padding: 6px 16px;
+    height: 3.7vh;
+}
+
+.rate-book button:first-child {
+    background-color: rgb(100, 216, 100);
+}
+
+.rate-book button:last-child {
+    background-color: rgb(241, 81, 53);
+}
+
+.rate-book span {
+    margin-top: 5%;
+}
+
+/**PAGINATION**/
+
+.pagination {
+    display: inline-block;
+    margin: 10px auto;
+    border-radius: 10px;
+}
+
+.pagination button {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+}
+
+.pagination button:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.pagination button:last-child {
+    border-radius: 0 10px 10px 0;
+}

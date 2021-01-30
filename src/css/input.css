@@ -1,0 +1,64 @@
+/**INPUT CSS*/
+.form-label {
+    position: relative;
+    display: block;
+    clear: both;
+    /* max-width: 50%; */
+    width: 60%;
+    margin: 0 auto;
+}
+
+label {
+    -webkit-transform: translateY(50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(50%);
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    position: absolute;
+    top: 20%;
+    left: 1em;
+    background: none;
+    font-weight: normal;
+    cursor: text;
+    pointer-events: none;
+    /* font-family: sans-serif; */
+}
+
+.form-label>input {
+    color: initial;
+    outline: none;
+    display: block;
+    transition: border-color;
+    background-color: transparent;
+    border-radius: 3px;
+    border: inherit;
+    border-bottom: 1px solid grey;
+    margin-right: 0;
+    margin-bottom: 0.75em;
+    padding: 0.5em 0.5em;
+    padding: 1em;
+    width: 100%;
+}
+
+.wrong-input {
+    background-color: rgb(156, 76, 76) !important;
+}
+
+.form-label>input:focus~label,
+.form-label>input:not(:placeholder-shown)~label {
+    top: -30%;
+    font-size: 0.8em;
+    padding: 0 0.3em;
+    z-index: index -10;
+}
+
+.wrong-label {
+    color: white;
+}
+
+.form-label>input::placeholder {
+    color: transparent;
+}
