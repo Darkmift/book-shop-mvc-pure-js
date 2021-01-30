@@ -1,68 +1,68 @@
 function init() {
-    renderBooks();
+  renderBooks();
 }
 
 //RENDER FUNCS
 ///render funcs
 function renderBooks() {
-    var strHtml = '';
-    setBookPageArr();
-    if (gBookPageArr && gBookPageArr.length) {
-        strHtml = objectArrToTable(gBookPageArr);
-    } else {
-        strHtml = 'Add a book!';
-    }
-    document.querySelector('.table-wrapper').innerHTML = strHtml;
+  var strHtml = "";
+  setBookPageArr();
+  if (gBookPageArr && gBookPageArr.length) {
+    strHtml = objectArrToTable(gBookPageArr);
+  } else {
+    strHtml = "Add a book!";
+  }
+  document.querySelector(".table-wrapper").innerHTML = strHtml;
 
-    renderPaginationNav();
+  renderPaginationNav();
 }
 
 // render table
 // dependency renderButtons()
 function objectArrToTable(objArr) {
-    var titles = Object.keys(objArr[0]);
-    var htmlStr = '<table><thead><tr>\n';
-    htmlStr += titles
-        .map(function (key) {
-            return `<th>${key}</th>`;
-        })
-        .join('');
-    htmlStr += `<th colspan="3">actions</th>`;
-    htmlStr += '</tr></thead></tbody>\n';
-    objArr.forEach(function (obj) {
-        htmlStr += `<tr>`;
-        for (const key in obj) {
-            var value = obj[key];
+  var titles = Object.keys(objArr[0]);
+  var htmlStr = "<table><thead><tr>\n";
+  htmlStr += titles
+    .map(function (key) {
+      return `<th>${key}</th>`;
+    })
+    .join("");
+  htmlStr += `<th colspan="3">actions</th>`;
+  htmlStr += "</tr></thead></tbody>\n";
+  objArr.forEach(function (obj) {
+    htmlStr += `<tr>`;
+    for (const key in obj) {
+      var value = obj[key];
 
-            switch (key) {
-                case 'imgUrl':
-                    htmlStr += `
+      switch (key) {
+        case "imgUrl":
+          htmlStr += `
                     <td>
                         <img class="book-image" src="./src/images/${value}" alt="${value}"/>
                     </td>`;
-                    break;
+          break;
 
-                case 'rating':
-                    htmlStr += renderRatingBtns(obj.id, value);
-                    break;
+        case "rating":
+          htmlStr += renderRatingBtns(obj.id, value);
+          break;
 
-                default:
-                    htmlStr += `<td>${value}</td>`;
-                    break;
-            }
-        }
+        default:
+          htmlStr += `<td>${value}</td>`;
+          break;
+      }
+    }
 
-        htmlStr += renderButtons(obj.id);
+    htmlStr += renderButtons(obj.id);
 
-        htmlStr += `</tr>\n`;
-    });
-    htmlStr += '</tbody></table>';
-    return htmlStr;
+    htmlStr += `</tr>\n`;
+  });
+  htmlStr += "</tbody></table>";
+  return htmlStr;
 }
 
 //render buttons in objectArrToTable()
 function renderButtons(bookId) {
-    return /*html*/ `
+  return /*html*/ `
     <td>
         <button style="background-color: rgb(52, 49, 231);" onclick="onReadBook('${bookId}')">Read</button>
     </td>
@@ -77,7 +77,7 @@ function renderButtons(bookId) {
 
 //render rating btns in tabel render
 function renderRatingBtns(bookId, rating) {
-    return /*html*/ `
+  return /*html*/ `
     <td class="rate-book">   
         <button onclick="onRateClick('${bookId}',true)">+</button>
         <span>${rating}</span>
@@ -87,7 +87,7 @@ function renderRatingBtns(bookId, rating) {
 }
 
 function renderForm(addOrEdit, bookId = null) {
-    return `<form class="modal-form btn-wrapper" onsubmit="onSubmitBookDetails(event,${addOrEdit},'${bookId}')">
+  return `<form class="modal-form btn-wrapper" onsubmit="onSubmitBookDetails(event,${addOrEdit},'${bookId}')">
 
     <span class="form-label">
         <input class="modal-input" type="text" placeholder="___" name="name" />
@@ -107,150 +107,150 @@ function renderForm(addOrEdit, bookId = null) {
 
 // render form modal
 function renderModal(openOrClose, addOrEdit, bookId = null) {
-    var elModal = document.querySelector('.modal');
-    elModal.style.display = openOrClose ? 'block' : 'none';
+  var elModal = document.querySelector(".modal");
+  elModal.style.display = openOrClose ? "block" : "none";
 
-    if (!openOrClose) return;
+  if (!openOrClose) return;
 
-    var elFormWrapper = document.querySelector('.content-wrapper');
-    elFormWrapper.innerHTML = renderForm(addOrEdit, bookId);
+  var elFormWrapper = document.querySelector(".content-wrapper");
+  elFormWrapper.innerHTML = renderForm(addOrEdit, bookId);
 
-    var elSpan = document.querySelector('.action-name');
-    console.log('elSpan:', elSpan);
-    elSpan.innerText = addOrEdit ? 'Add' : 'Update';
+  var elSpan = document.querySelector(".action-name");
+  console.log("elSpan:", elSpan);
+  elSpan.innerText = addOrEdit ? "Add" : "Update";
 
-    if (!addOrEdit) {
-        var book = getBook(bookId);
-        console.log('book:', book);
-        var elInputs = document.querySelectorAll('.modal-form input');
-        elInputs[0].value = book.name;
-        elInputs[1].value = book.price;
-    }
+  if (!addOrEdit) {
+    var book = getBook(bookId);
+    console.log("book:", book);
+    var elInputs = document.querySelectorAll(".modal-form input");
+    elInputs[0].value = book.name;
+    elInputs[1].value = book.price;
+  }
 }
 
 // render read modal
 function renderReadModal(openOrClose, book) {
-    var elModal = document.querySelector('.modal-book-details');
-    if (!openOrClose) {
-        elModal.style.display = 'none';
-        return;
-    }
+  var elModal = document.querySelector(".modal-book-details");
+  if (!openOrClose) {
+    elModal.style.display = "none";
+    return;
+  }
 
-    console.log('book:', book);
+  console.log("book:", book);
 
-    var elBookName = document.querySelector('.book-name');
-    elBookName.innerText = book.name;
-    var elBookPrice = document.querySelector('.book-price');
-    elBookPrice.innerText = book.price;
+  var elBookName = document.querySelector(".book-name");
+  elBookName.innerText = book.name;
+  var elBookPrice = document.querySelector(".book-price");
+  elBookPrice.innerText = book.price;
 
-    var elBookImg = document.querySelector('.book-image');
-    elBookImg.src = `./src/images/${book.imgUrl}`;
+  var elBookImg = document.querySelector(".book-image");
+  elBookImg.src = `./src/images/${book.imgUrl}`;
 
-    elModal.style.display = 'block';
+  elModal.style.display = "block";
 }
 
 //render pagination nav
 function renderPaginationNav() {
-    var pageSize = getPageSize();
-    var booksAmount = getBookLength();
-    var btnAmount = Math.ceil(booksAmount / pageSize);
-    // btnAmount = btnAmount < 1 ? 0 : btnAmount;
-    var strHTML = '';
+  var pageSize = getPageSize();
+  var booksAmount = getBookLength();
+  var btnAmount = Math.ceil(booksAmount / pageSize);
+  // btnAmount = btnAmount < 1 ? 0 : btnAmount;
+  var strHTML = "";
 
-    for (let i = 1; i <= btnAmount; i++) {
-        strHTML += /*html*/ `
+  for (let i = 0; i < btnAmount; i++) {
+    strHTML += /*html*/ `
         <button onclick="onPageClick(${i})">
-            ${i}
+            ${i + 1}
         </button>\n`;
-    }
-    elPageNav = document.querySelector('.page-nav');
-    elPageNav.innerHTML = strHTML;
+  }
+  elPageNav = document.querySelector(".page-nav");
+  elPageNav.innerHTML = strHTML;
 
-    // return strHTML;
+  // return strHTML;
 }
 
 //FORM logic
 //form hanlder
 function onSubmitBookDetails(ev, addOrEdit, bookId) {
-    ev.preventDefault();
+  ev.preventDefault();
 
-    var formData = {};
-    var inputErrors = false;
-    var elInputs = document.querySelectorAll('.modal-form input');
-    elInputs.forEach(function (input) {
-        var name = input.name;
-        var value = input.value;
-        formData[name] = value;
-    });
+  var formData = {};
+  var inputErrors = false;
+  var elInputs = document.querySelectorAll(".modal-form input");
+  elInputs.forEach(function (input) {
+    var name = input.name;
+    var value = input.value;
+    formData[name] = value;
+  });
 
-    if (formData.name === '') {
-        validateInput(elInputs[0], 'book', 'please enter book name');
-        inputErrors = true;
-    }
+  if (formData.name === "") {
+    validateInput(elInputs[0], "book", "please enter book name");
+    inputErrors = true;
+  }
 
-    if (formData.price === '' || isNaN(+formData.price)) {
-        elInputs[1].value = null;
-        validateInput(elInputs[1], 'price', 'please enter price');
-        inputErrors = true;
-    }
+  if (formData.price === "" || isNaN(+formData.price)) {
+    elInputs[1].value = null;
+    validateInput(elInputs[1], "price", "please enter price");
+    inputErrors = true;
+  }
 
-    if (inputErrors) return;
+  if (inputErrors) return;
 
-    //use addOrEdit
+  //use addOrEdit
 
-    if (addOrEdit) {
-        //create new
-        addBook(formData.name, formData.price);
-    } else {
-        //update
-        updateBook(bookId, formData.price /**we can add more attr */);
-    }
-    console.log('bookId:', bookId);
-    console.log('addOrEdit:', addOrEdit);
-    //end close modal
-    renderModal(false);
-    renderBooks();
+  if (addOrEdit) {
+    //create new
+    addBook(formData.name, formData.price);
+  } else {
+    //update
+    updateBook(bookId, formData.price /**we can add more attr */);
+  }
+  console.log("bookId:", bookId);
+  console.log("addOrEdit:", addOrEdit);
+  //end close modal
+  renderModal(false);
+  renderBooks();
 }
 
 ///crudl events
 //create
 function onAddBook() {
-    renderModal(true, true);
+  renderModal(true, true);
 }
 
 //read
 function onReadBook(bookId) {
-    var book = getBook(bookId);
-    renderReadModal(true, book);
+  var book = getBook(bookId);
+  renderReadModal(true, book);
 }
 
 // update
 function onUpdateBook(bookId, price) {
-    renderModal(true, false, bookId);
+  renderModal(true, false, bookId);
 }
 
 // delete
 function onRemoveBook(bookId) {
-    removeBook(bookId);
-    renderBooks();
+  removeBook(bookId);
+  renderBooks();
 }
 
 //rating
 function onRateClick(bookId, addOrDecrease) {
-    rateBook(bookId, addOrDecrease);
-    renderBooks();
+  rateBook(bookId, addOrDecrease);
+  renderBooks();
 }
 
 //list --bonus(pagination)
 //catch click for page size setting
 function onSetPageSizeClick(num) {
-    // debugger;
-    setPageSize(num);
-    renderBooks();
+  // debugger;
+  setPageSize(num);
+  renderBooks();
 }
 
 function onPageClick(pageNumber) {
-    // debugger;
-    setPageNum(pageNumber);
-    renderBooks();
+  // debugger;
+  setPageNum(pageNumber);
+  renderBooks();
 }
