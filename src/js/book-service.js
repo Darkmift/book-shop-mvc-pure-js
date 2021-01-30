@@ -12,6 +12,7 @@ _createBooks();
 function addBook(name, price = 0, imgUrl = "noname.jpg") {
   var book = { id: makeId(), name, price, imgUrl };
   gBooks.push(book);
+  setPageNum(0);
   saveToStorage(BOOK_STORAGE_KEY, gBooks);
 }
 
@@ -73,6 +74,7 @@ function updateBook(bookId, bookPrice /**we can add more attr */) {
   }
 
   bookToUpdate.price = bookPrice;
+  setPageNum(0);
   saveToStorage(BOOK_STORAGE_KEY, gBooks);
 }
 
@@ -82,11 +84,13 @@ function removeBook(bookId) {
   console.log("bookIdx:", bookIdx);
   if (bookIdx === -1) return;
   gBooks.splice(bookIdx, 1);
+  setPageNum(0);
   saveToStorage(BOOK_STORAGE_KEY, gBooks);
 }
 
 // delete all
 function _deleteBooks() {
+  setPageNum(0);
   saveToStorage(BOOK_STORAGE_KEY, []);
 }
 
